@@ -21,11 +21,20 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea type="text" id="description" name="campground[description]" class="form-control" required ><%= campground.location %></textarea>
+                <textarea type="text" id="description" name="campground[description]" class="form-control" required ><%= campground.description %></textarea>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Add more image(s)</label>
                 <input class="form-control" type="file" id="image" multiple name="image">
+            </div>
+            <div class="mb-3">
+                <% campground.images.forEach((img, i) => { %>
+                    <img src="<%= img.thumbnail %>" alt="" class="img-thumbnail">
+                    <div class="form-check-inline">
+                        <input type="checkbox" name="deletedImages[]" id="image-<%= i %>" value="<%= img.filename %>">
+                    </div>
+                    <label for="image-<%= i %>">Delete?</label>
+                <% }) %>  
             </div>
             <div class="mb-3">
                 <button class="btn btn-info">Update</button>
