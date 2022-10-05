@@ -1,12 +1,13 @@
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
-    container: "map",
+    container: "cluster-map",
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: "mapbox://styles/mapbox/dark-v10",
     center: [-103.5917, 40.6699],
     zoom: 3
 });
 
+map.addControl(new mapboxgl.NavigationControl());
 map.on("load", () => {
     // Add a new source from our GeoJSON data and
     // set the 'cluster' option to true. GL-JS will
@@ -14,7 +15,6 @@ map.on("load", () => {
     map.addSource("campgrounds", {
         type: "geojson",
         // Point to GeoJSON data. This example visualizes all M1.0+ campgrounds
-        // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
         data: campgrounds,
         cluster: true,
         clusterMaxZoom: 14, // Max zoom to cluster points on
